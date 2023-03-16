@@ -1,8 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import img from "../../assets/messi.png";
+import { useContext } from "react";
+import { TodoContext } from "../../context/TodoContext";
 export interface CardProps {}
 
 const Card: React.FC<CardProps> = () => {
+
+
+const {getPlayers, players} = useContext(TodoContext);
+
+
+console.log(players, "estos son los player")
+
+
   return (
     <div className="flex h-screen w-screen items-center justify-center bg-gradient-to-bl from-violet-900 to-teal-400">
       <div className="p-8 w-96 cursor-pointer rounded-3xl bg-gray-100 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl">
@@ -33,6 +43,7 @@ const Card: React.FC<CardProps> = () => {
           <button className="rounded-xl bg-black px-24 py-2 text-white">
             Select player
           </button>
+          <button className="rounded-xl bg-black px-24 py-2 text-white" onClick={getPlayers}></button>
         </div>
       </div>
     </div>
