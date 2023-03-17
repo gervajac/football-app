@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card } from '../../components/Card';
+import { CardSection } from '../../components/CardSection';
 import { Navbar } from '../../components/Navbar';
 import { TodoProvider } from '../../context/TodoProvider';
+import { Footer } from '../../components/Footer';
 
 export interface HomeProps {}
 
@@ -9,7 +10,8 @@ const Home : React.FC<HomeProps> = () => {
 	return (
 		<TodoProvider>
 			<Navbar/>
-			<Card/>
+			<CardSection/>
+			<Footer/>
 		</TodoProvider>
 	);
 };

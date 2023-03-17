@@ -19,4 +19,5 @@ export interface Player {
     image: string;
     goals:number;
     asists:number;
+    team: string;
 }
