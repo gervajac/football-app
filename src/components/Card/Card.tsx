@@ -1,11 +1,20 @@
-import React, { useEffect } from "react";
-import img1 from "../../assets/messi.png";
-
+import React from "react";
+import { useContext } from "react";
+import { TodoContext } from "../../context/TodoContext";
 import { Player } from "../../interfaces/interfaces";
 
 export interface CardProps {}
 
 const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, position, image}: Player) => {
+
+  const {addFavourites, favourites} = useContext(TodoContext)
+
+
+
+  const handleAddFavourites = (id:any) => {
+      addFavourites(id)
+  }
+
 
   return (
     <div className="flex items-center justify-center px-12">
@@ -34,8 +43,8 @@ const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, pos
           </li>
         </ul>
         <div className="text-center">
-          <button className="rounded-xl bg-black px-24 py-2 text-white">
-            Select player
+          <button onClick={() => handleAddFavourites(id)} className="rounded-xl bg-black px-24 py-2 text-white">
+            Add to favourites
           </button>
         </div>
       </div>

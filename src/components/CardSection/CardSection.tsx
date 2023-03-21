@@ -13,7 +13,6 @@ const CardSection : React.FC<CardSectionProps> = () => {
 		getPlayers()
 	}, [])
 
-	console.log(players.players, "estos son los player")
 
 	if (players.players.length > 1) {  
 		return (

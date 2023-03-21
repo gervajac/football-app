@@ -1,11 +1,12 @@
 import { createContext } from "react";
-import { TodoState } from "../interfaces/interfaces";
 
 
 export type TodoContextProps = {
     /*todoState: TodoState*/
     players?: any
     getPlayers: any
+    favourites: any
+    addFavourites: any
 }
 
 

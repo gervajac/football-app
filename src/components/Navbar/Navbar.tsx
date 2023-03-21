@@ -7,7 +7,7 @@ export interface NavbarProps {}
 const Navbar: React.FC<NavbarProps> = () => {
 
   const auth = getAuth();
-  console.log(auth, "aSUTHTHTHT")
+
 
   return (
     <div className="bg-gray-100 font-sans w-full m-0">
