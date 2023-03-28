@@ -1,4 +1,5 @@
 import React from "react";
+import img from "../../assets/messi.png"
 import { useContext } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import { Player } from "../../interfaces/interfaces";
@@ -7,7 +8,8 @@ export interface CardProps {}
 
 const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, position, image}: Player) => {
 
-  const {addFavourites, favourites} = useContext(TodoContext)
+  const {addFavourites, state} = useContext(TodoContext)
+
 
 
 
@@ -44,7 +46,7 @@ const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, pos
         </ul>
         <div className="text-center">
           <button onClick={() => handleAddFavourites(id)} className="rounded-xl bg-black px-24 py-2 text-white">
-            Add to favourites
+            {state.favourites.find(e => e._id === id)? "Added" : "Add to Favourites"} 
           </button>
         </div>
       </div>

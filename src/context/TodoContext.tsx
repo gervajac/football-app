@@ -3,9 +3,8 @@ import { createContext } from "react";
 
 export type TodoContextProps = {
     /*todoState: TodoState*/
-    players?: any
+    state: any
     getPlayers: any
-    favourites: any
     addFavourites: any
 }
 

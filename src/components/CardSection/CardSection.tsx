@@ -7,18 +7,17 @@ export interface CardSectionProps {}
 
 const CardSection : React.FC<CardSectionProps> = () => {  
 
-	const {getPlayers, players} = useContext(TodoContext);
+	const {getPlayers, state} = useContext(TodoContext);
 
 	useEffect(() => {
 		getPlayers()
 	}, [])
 
-
-	if (players.players.length > 1) {  
+	if (state.players.length > 1) {  
 		return (
 		<div id="pasteles" className="bg-indigo-50">
 		  <div className="flex w- p-0 justify-between flex-wrap bg-gradient-to-bl from-violet-900 to-teal-400">
-		   {players.players.map((e: any) => {
+		   {state.players.map((e: any) => {
 			return (
 			  <Card
 				key={e._id}

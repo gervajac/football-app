@@ -7,16 +7,16 @@ import { Player } from "../interfaces/interfaces";
     
 
 export const todoReducer = (state: TodoState, action: TodoAction): TodoState => {
-    switch(action.type) {
+    switch(type) {
         case "addTodo":
             return {
                 ...state,
-                todos: [...state.todos, action.payload]
+                todos: [...state.todos, payload]
             }
          case "addTodo":
             return {
                 ...state,
-                todos: [...state.todos, action.payload]
+                todos: [...state.todos, payload]
             }
         default:
 
@@ -27,30 +27,38 @@ export const todoReducer = (state: TodoState, action: TodoAction): TodoState => 
 type PlayerAction = 
                 {type: "players", payload: Player} 
                 | {type: "users", payload: Player}
-                | {type: "favourites", payload: Player}
+                | {type: "favourites", payload: string}
+                | {type: "REMOVE_TO_FAVOURITES", payload: string}
 
 export const playerReducer = (state: any, action: PlayerAction): any => {
-   console.log(state.players, "ESTADO DE PLAYERS 111111111")
-    switch(action.type) {
+    const { type, payload } = action
+   console.log(state, "ESTADO DE PLAYERS 111111111")
+    switch(type) {
         case "players":
             return {
                 ...state,
-                players: action.payload
+                players: payload
             }
         case "favourites":
-
-        console.log(state.players, "ESTADO DE PLATYERS 22222222")
-        const add = state.players.find((item: any) => item.id === action.payload)
-
-           console.log(add, "ADD LOG")
-            
+            const add = state.players.find((item: any) => {
+                if(item._id === payload && !state.favourites.some(e => e?._id === payload)){
+                    return item
+                }
+            })
             return {
                 ...state,
+                favourites: add ? [...state.favourites, add] : state.favourites
+            }
+        case "REMOVE_TO_FAVOURITES": 
+            const filteredFavourites = state.favourites.filter(element => element._id !== payload)
+            return {
+                ...state,
+                favourites: filteredFavourites
             }
         /*case "users":
         return {
             ...state,
-            players: action.payload
+            players: payload
         } */  
        default:
 

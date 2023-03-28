@@ -37,13 +37,13 @@ interface props {
 
 export const TodoProvider = ({ children }: props) => {
   /*const [todoState, dispatchToDo] = useReducer(todoReducer, INITIAL_STATE);*/
-  const [players, dispatchPlayer] = useReducer(playerReducer, INITIAL_STATE);
-  const [favourites, dispatchFavourites] = useReducer(playerReducer,INITIAL_STATE);
+  const [state, dispatch] = useReducer(playerReducer, INITIAL_STATE);
+  //const [favourites, dispatchFavourites] = useReducer(playerReducer, INITIAL_STATE);
 
   const getPlayers = async () => {
     try {
       const resp = await axios.get("http://localhost:3002/item");
-      return dispatchPlayer({
+      return dispatch({
         type: "players",
         payload: resp.data,
       });
@@ -54,7 +54,7 @@ export const TodoProvider = ({ children }: props) => {
 
   const addFavourites = async (id:any) => {
     try {
-      return dispatchFavourites({
+      return dispatch({
         type: "favourites",
         payload: id,
       });
@@ -64,7 +64,7 @@ export const TodoProvider = ({ children }: props) => {
   };
 
   return (
-    <TodoContext.Provider value={{ getPlayers, players, addFavourites, favourites }}>
+    <TodoContext.Provider value={{ getPlayers, state, addFavourites}}>
       {children}
     </TodoContext.Provider>
   );
