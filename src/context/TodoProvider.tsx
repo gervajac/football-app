@@ -63,8 +63,22 @@ export const TodoProvider = ({ children }: props) => {
     }
   };
 
+  const putPlayer = async (id: string) => {
+    console.log(id, "asdddddddddddddddd")
+    try {
+      const resp = await axios.put(`"http://localhost:3002/item/${id}"`);
+      console.log(resp, "respuestass")
+      return dispatch({
+        type: "PUT_PLAYER",
+        payload: resp.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <TodoContext.Provider value={{ getPlayers, state, addFavourites}}>
+    <TodoContext.Provider value={{ getPlayers, state, addFavourites, putPlayer}}>
       {children}
     </TodoContext.Provider>
   );

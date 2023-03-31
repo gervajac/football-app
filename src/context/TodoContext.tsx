@@ -6,6 +6,7 @@ export type TodoContextProps = {
     state: any
     getPlayers: any
     addFavourites: any
+    putPlayer: any
 }
 
 

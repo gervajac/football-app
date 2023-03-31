@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { initializeApp } from "firebase/app";
 import { config } from "./config/config";
 import { AuthRoute } from "./components/AuthRoute";
+import { TodoList } from "./components/TodoList";
 
 initializeApp(config.firebaseConfig);
 

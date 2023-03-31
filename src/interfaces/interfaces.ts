@@ -7,4 +7,9 @@ export interface Player {
     goals:number;
     asists:number;
     team: string;
+    favourite: boolean;
+}
+
+export interface User {
+    token: string;
 }

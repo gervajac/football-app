@@ -1,32 +1,59 @@
 import React from "react";
-import img from "../../assets/messi.png"
-import { useContext } from "react";
+import axios from "axios";
+import { useContext, useState, useEffect } from "react";
 import { TodoContext } from "../../context/TodoContext";
 import { Player } from "../../interfaces/interfaces";
 
 export interface CardProps {}
 
-const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, position, image}: Player) => {
+const Card: React.FC<Player> = ({
+  id,
+  name,
+  nacionality,
+  asists,
+  goals,
+  team,
+  position,
+  image,
+  favourite,
+}: Player) => {
 
-  const {addFavourites, state} = useContext(TodoContext)
+  const { state, getPlayers } = useContext(TodoContext);
+  const [favorites, setFavorites] = useState(state.players);
+  const [fav, setFav] = useState()
 
+// useEffect(() => {
+//   getPlayers()
+// }, [])
 
+//   const handleStateFav = (id) => {
+//     const findPLayer = state.players.find(e => e._id === id);
+//     if( findPLayer.favourite === false) {
+//       setLocalFav(true)
+//     }
+// }
 
+  
 
-  const handleAddFavourites = (id:any) => {
-      addFavourites(id)
-  }
+  const handleFav = (id) => {
+    const find = state.players.find(e => e._id === id)
+    axios.put(`http://localhost:3002/item/${id}`, find.favourite? {favourite: false} : {favourite: true})
+    getPlayers()
+  } 
 
-
+  // const handleAddFavourites = (id:any) => {
+  //     addFavourites(id)
+  // }
+    console.log(fav)
   return (
-    <div className="flex items-center justify-center px-12">
-      <div className="p-8 mt-32 mb-10 w-96 cursor-pointer rounded-3xl bg-gray-100 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl">
+    <div className="flex items-center justify-center px-12 ">
+      <div  className={favourite ? "p-8 mt-32 mb-10 w-96 cursor-pointer rounded-3xl bg-gradient-to-r from-orange-800 via-orange-500 to-yellow-600 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl shadow-lg border-solid border-2 border-black" : "p-8 mt-32 mb-10 w-96 cursor-pointer rounded-3xl bg-gray-500 opacity-75 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl shadow-lg border-solid border-2 border-black"}>
         <div className="-mb-20 -translate-y-1/2 transform">
           <img
             src={image}
             alt="Lionel Messi"
             title="Lionel Messi"
-            className="mx-auto h-64"
+            className="mx-auto h-64 rounded-lg border-solid border-2 border-black shadow-2xl shadow-stone-800"
           />
         </div>
         <div className="text-center">
@@ -45,8 +72,14 @@ const Card: React.FC<Player> = ({id, name, nacionality, asists, goals, team, pos
           </li>
         </ul>
         <div className="text-center">
-          <button onClick={() => handleAddFavourites(id)} className="rounded-xl bg-black px-24 py-2 text-white">
+          {/* <button onClick={() => handleAddFavourites(id)} className="rounded-xl bg-black px-24 py-2 text-white">
             {state.favourites.find(e => e._id === id)? "Added" : "Add to Favourites"} 
+          </button> */}
+            <button className={favourite ? "bg-white rounded-lg w-36 h-12 border-solid border-2 border-black" : "bg-white rounded-lg w-36 h-12 border-solid border-2 border-black"} 
+            onClick={() => {
+              handleFav(id)
+              }}>
+              {favourite? "Delete Favourite" : "Add Favourite"}
           </button>
         </div>
       </div>

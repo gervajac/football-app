@@ -29,10 +29,11 @@ type PlayerAction =
                 | {type: "users", payload: Player}
                 | {type: "favourites", payload: string}
                 | {type: "REMOVE_TO_FAVOURITES", payload: string}
+                | {type: "PUT_PLAYER", payload: Player}
 
 export const playerReducer = (state: any, action: PlayerAction): any => {
     const { type, payload } = action
-   console.log(state, "ESTADO DE PLAYERS 111111111")
+
     switch(type) {
         case "players":
             return {
@@ -54,6 +55,14 @@ export const playerReducer = (state: any, action: PlayerAction): any => {
             return {
                 ...state,
                 favourites: filteredFavourites
+            }
+            case "PUT_PLAYER": 
+            console.log(payload, "payloadss")
+
+
+            return {
+                ...state,
+                players: payload
             }
         /*case "users":
         return {
