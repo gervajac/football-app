@@ -19,13 +19,7 @@ const Card: React.FC<Player> = ({
 }: Player) => {
 
   const { state, getPlayers } = useContext(TodoContext);
-  const [favorites, setFavorites] = useState(state.players);
-  const [fav, setFav] = useState()
-
-// useEffect(() => {
-//   getPlayers()
-// }, [])
-
+  const [favFiltered, setFavFiltered] = useState(state.players);
 //   const handleStateFav = (id) => {
 //     const findPLayer = state.players.find(e => e._id === id);
 //     if( findPLayer.favourite === false) {
@@ -38,13 +32,15 @@ const Card: React.FC<Player> = ({
   const handleFav = (id) => {
     const find = state.players.find(e => e._id === id)
     axios.put(`http://localhost:3002/item/${id}`, find.favourite? {favourite: false} : {favourite: true})
+    //const filter = state.players.filter(e => e.favourite === true)
+    //setFavFiltered(filter)
     getPlayers()
   } 
 
   // const handleAddFavourites = (id:any) => {
   //     addFavourites(id)
   // }
-    console.log(fav)
+
   return (
     <div className="flex items-center justify-center px-12 ">
       <div  className={favourite ? "p-8 mt-32 mb-10 w-96 cursor-pointer rounded-3xl bg-gradient-to-r from-orange-800 via-orange-500 to-yellow-600 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl shadow-lg border-solid border-2 border-black" : "p-8 mt-32 mb-10 w-96 cursor-pointer rounded-3xl bg-gray-500 opacity-75 transition duration-300 ease-in-out hover:scale-105 hover:drop-shadow-2xl shadow-lg border-solid border-2 border-black"}>
@@ -79,7 +75,7 @@ const Card: React.FC<Player> = ({
             onClick={() => {
               handleFav(id)
               }}>
-              {favourite? "Delete Favourite" : "Add Favourite"}
+              {favourite ? "Delete Favourite" : "Add Favourite"}
           </button>
         </div>
       </div>
