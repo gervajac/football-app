@@ -52,11 +52,12 @@ export const TodoProvider = ({ children }: props) => {
     }
   };
 
-  const addFavourites = async (id:any) => {
+  const getFavourites = async () => {
     try {
+      const resp = await axios.get("http://localhost:3002/item");
       return dispatch({
-        type: "favourites",
-        payload: id,
+        type: "GET_FAVOURITES",
+        payload: resp.data,
       });
     } catch (err) {
       console.log(err);
@@ -78,7 +79,7 @@ export const TodoProvider = ({ children }: props) => {
   };
 
   return (
-    <TodoContext.Provider value={{ getPlayers, state, addFavourites, putPlayer}}>
+    <TodoContext.Provider value={{ getPlayers, state, getFavourites, putPlayer}}>
       {children}
     </TodoContext.Provider>
   );

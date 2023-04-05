@@ -8,6 +8,7 @@ import { initializeApp } from "firebase/app";
 import { config } from "./config/config";
 import { AuthRoute } from "./components/AuthRoute";
 import { TodoList } from "./components/TodoList";
+import { Favourites } from "./pages/Favourites";
 
 initializeApp(config.firebaseConfig);
 
@@ -21,6 +22,14 @@ function App() {
             element={
               <AuthRoute>
                 <Home />
+              </AuthRoute>
+            }
+          />
+          <Route
+            path="/favourites"
+            element={
+              <AuthRoute>
+                <Favourites />
               </AuthRoute>
             }
           />

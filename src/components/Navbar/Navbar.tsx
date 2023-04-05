@@ -24,7 +24,7 @@ const Navbar: React.FC<NavbarProps> = () => {
 
             <div className="hidden sm:flex sm:items-center">
               <a
-                href="#"
+                href="http://localhost:3000/favourites"
                 className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4"
               >
                 Favourites

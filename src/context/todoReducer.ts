@@ -27,7 +27,7 @@ export const todoReducer = (state: TodoState, action: TodoAction): TodoState => 
 type PlayerAction = 
                 {type: "players", payload: Player} 
                 | {type: "users", payload: Player}
-                | {type: "favourites", payload: string}
+                | {type: "GET_FAVOURITES", payload: Player}
                 | {type: "REMOVE_TO_FAVOURITES", payload: string}
                 | {type: "PUT_PLAYER", payload: Player}
 
@@ -40,15 +40,12 @@ export const playerReducer = (state: any, action: PlayerAction): any => {
                 ...state,
                 players: payload
             }
-        case "favourites":
-            const add = state.players.find((item: any) => {
-                if(item._id === payload && !state.favourites.some(e => e?._id === payload)){
-                    return item
-                }
-            })
+        case "GET_FAVOURITES":
+
+        const favFiltered = state.players.filter(e => e.favourite === true)
             return {
                 ...state,
-                favourites: add ? [...state.favourites, add] : state.favourites
+                favourites: favFiltered
             }
         case "REMOVE_TO_FAVOURITES": 
             const filteredFavourites = state.favourites.filter(element => element._id !== payload)

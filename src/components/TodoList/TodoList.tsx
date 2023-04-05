@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { /*useEffect*/ } from 'react';
 import { User } from '../../interfaces/interfaces';
-import axios from 'axios';
+//import axios from 'axios';
 export interface TodoListProps {}
 
 const TodoList : React.FC<User> = ({token}) => {
@@ -21,7 +21,7 @@ const TodoList : React.FC<User> = ({token}) => {
 	// 	console.log(res.data)
 	// }
 
-	return <div>TODO</div>;
+	return <></>;
 };
 
 export default TodoList;
